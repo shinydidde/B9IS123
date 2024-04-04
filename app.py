@@ -56,12 +56,12 @@ def add():
 
 @app.route("/update", methods=['PUT', 'POST']) #Update Student
 def update():
-  if request.method == 'POST':
+  if request.method == 'PUT':
     name = request.form['name']
     email = request.form['email']
     print(name,email)
     cur = mysql.cursor() #create a connection to the SQL instance
-    s='''UPDATE INTO students(studentName, email) VALUES('{}','{}');'''.format(name,email)
+    s='''UPDATE students SET email = '{}' WHERE studentName = ('{}')'''.format(email,name)
     app.logger.info(s)
     cur.execute(s)
     mysql.commit()
