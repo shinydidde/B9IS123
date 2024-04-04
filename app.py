@@ -70,7 +70,7 @@ def update():
 
   return '{"Result":"Updated"}'
 
-@app.route("/delete", methods=['GET', 'POST']) #Update Student
+@app.route("/delete", methods=['GET', 'POST']) #Delete Student
 def delete():
   if request.method == 'POST':
     email = request.form['email']
