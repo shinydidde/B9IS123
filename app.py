@@ -55,7 +55,7 @@ def add():
   return '{"Result":"Success"}'
 
 @app.route("/update", methods=['PUT', 'POST']) #Update Student
-def add():
+def update():
   if request.method == 'POST':
     name = request.form['name']
     email = request.form['email']
