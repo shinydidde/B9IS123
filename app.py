@@ -52,7 +52,7 @@ def add():
   else:
     return render_template('add.html')
 
-  return '{"Result":"Success"}'
+  return '{"Result":"Added"}'
 
 @app.route("/update", methods=['GET', 'POST']) #Update Student
 def update():
@@ -68,7 +68,22 @@ def update():
   else:
     return render_template('update.html')
 
-  return '{"Result":"Success"}'
+  return '{"Result":"Updated"}'
+
+@app.route("/delete", methods=['GET', 'POST']) #Update Student
+def update():
+  if request.method == 'POST':
+    email = request.form['email']
+    print(email)
+    cur = mysql.cursor() #create a connection to the SQL instance
+    s='''DELETE FROM students WHERE email = ('{}')'''.format(email)
+    app.logger.info(s)
+    cur.execute(s)
+    mysql.commit()
+  else:
+    return render_template('delete.html')
+
+  return '{"Result":"Deleted"}'
 
 @app.route("/") #Default - Show Data
 def hello(): # Name of the method
