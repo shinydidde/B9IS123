@@ -53,6 +53,23 @@ def add():
     return render_template('add.html')
 
   return '{"Result":"Success"}'
+
+@app.route("/update", methods=['PUT', 'POST']) #Update Student
+def add():
+  if request.method == 'POST':
+    name = request.form['name']
+    email = request.form['email']
+    print(name,email)
+    cur = mysql.cursor() #create a connection to the SQL instance
+    s='''UPDATE INTO students(studentName, email) VALUES('{}','{}');'''.format(name,email)
+    app.logger.info(s)
+    cur.execute(s)
+    mysql.commit()
+  else:
+    return render_template('update.html')
+
+  return '{"Result":"Success"}'
+
 @app.route("/") #Default - Show Data
 def hello(): # Name of the method
   cur = mysql.cursor() #create a connection to the SQL instance
